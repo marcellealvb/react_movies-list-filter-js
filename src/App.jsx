@@ -5,13 +5,14 @@ import { MoviesList } from './components/MoviesList';
 import moviesFromServer from './api/movies.json';
 
 function getPreparedGoods(goods, { query }) {
-  let preparedGoods = [...goods];
+  let preparedGoods = goods;
+  const normalizedQuery = query.trim().toLowerCase();
 
-  if (query) {
+  if (normalizedQuery) {
     preparedGoods = preparedGoods.filter(
       good =>
-        good.title.toLowerCase().includes(query.toLowerCase()) ||
-        good.description.toLowerCase().includes(query.toLowerCase()),
+        good.title.trim().toLowerCase().includes(normalizedQuery) ||
+        good.description.trim().toLowerCase().includes(normalizedQuery),
     );
   }
 
