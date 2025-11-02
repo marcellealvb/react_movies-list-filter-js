@@ -9,11 +9,15 @@ function getPreparedGoods(goods, { query }) {
   const normalizedQuery = query.trim().toLowerCase();
 
   if (normalizedQuery) {
-    preparedGoods = preparedGoods.filter(
-      good =>
-        good.title.trim().toLowerCase().includes(normalizedQuery) ||
-        good.description.trim().toLowerCase().includes(normalizedQuery),
-    );
+    preparedGoods = preparedGoods.filter(good => {
+      const normalizedTitle = good.title.trim().toLowerCase();
+      const normalizedDescription = good.description.trim().toLowerCase();
+
+      return (
+        normalizedTitle.includes(normalizedQuery) ||
+        normalizedDescription.includes(normalizedQuery)
+      );
+    });
   }
 
   return preparedGoods;
